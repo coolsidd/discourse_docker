@@ -6,10 +6,11 @@ cd $DIR
 ## Make sure only root can run our script
 ##
 check_root() {
-  if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root. Please sudo or log in as root first." 1>&2
-    exit 1
-  fi
+  echo "Hahahahah!"
+  # if [[ $EUID -ne 0 ]]; then
+  #   echo "This script must be run as root. Please sudo or log in as root first." 1>&2
+  #   exit 1
+  # fi
 }
 
 ##
