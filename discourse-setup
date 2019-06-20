@@ -326,8 +326,8 @@ ask_user_for_config() {
   read_config "DISCOURSE_HOSTNAME"
   hostname=$read_config_result
 
-  local new_value=""
-  local config_ok="n"
+  local new_value
+  local config_ok="y"
   local update_ok="y"
 
   echo ""
@@ -336,7 +336,7 @@ ask_user_for_config() {
   do
     if [ ! -z "$hostname" ]
     then
-      echo "Hostname for your Discourse? [$hostname]: " new_value
+      echo "Hostname for your Discourse? [$hostname]: " $new_value
       if [ ! -z "$new_value" ]
       then
           hostname="$new_value"
@@ -352,7 +352,7 @@ ask_user_for_config() {
 
     if [ ! -z "$developer_emails" ]
     then
-      echo "Email address for admin account(s)? [$developer_emails]: " new_value
+      echo "Email address for admin account(s)? [$developer_emails]: " $new_value
       if [ ! -z "$new_value" ]
       then
           developer_emails="$new_value"
@@ -361,7 +361,7 @@ ask_user_for_config() {
 
     if [ ! -z "$smtp_address" ]
     then
-      echo "SMTP server address? [$smtp_address]: " new_value
+      echo "SMTP server address? [$smtp_address]: " $new_value
       if [ ! -z "$new_value" ]
       then
         smtp_address="$new_value"
@@ -370,7 +370,7 @@ ask_user_for_config() {
 
     if [ ! -z "$smtp_port" ]
     then
-      echo "SMTP port? [$smtp_port]: " new_value
+      echo "SMTP port? [$smtp_port]: " $new_value
       if [ ! -z "$new_value" ]
       then
         smtp_port="$new_value"
@@ -398,14 +398,14 @@ ask_user_for_config() {
 
     if [ ! -z "$smtp_user_name" ]
     then
-      echo "SMTP user name? [$smtp_user_name]: " new_value
+      echo "SMTP user name? [$smtp_user_name]: " $new_value
       if [ ! -z "$new_value" ]
       then
           smtp_user_name="$new_value"
       fi
     fi
 
-    echo "SMTP password? [$smtp_password]: " new_value
+    echo "SMTP password? [$smtp_password]: " $new_value
     if [ ! -z "$new_value" ]
     then
         smtp_password="$new_value"
@@ -413,7 +413,7 @@ ask_user_for_config() {
 
     if [ ! -z $letsencrypt_account_email ]
     then
-      echo "Optional email address for setting up Let's Encrypt? ($letsencrypt_status) [$letsencrypt_account_email]: " new_value
+      echo "Optional email address for setting up Let's Encrypt? ($letsencrypt_status) [$letsencrypt_account_email]: " $new_value
       if [ ! -z "$new_value" ]
       then
           letsencrypt_account_email="$new_value"
@@ -446,7 +446,7 @@ ask_user_for_config() {
 
 
     echo ""
-    echo "ENTER to continue, 'n' to try again, Ctrl+C to exit: " config_ok
+    echo "ENTER to continue, 'n' to try again, Ctrl+C to exit: " $config_ok
   done
 
   sed -i -e "s/^  DISCOURSE_HOSTNAME:.*/  DISCOURSE_HOSTNAME: $hostname/w $changelog" $web_file
